@@ -1,14 +1,16 @@
 <?php
-declare(strict_types=1);
 
-namespace App\Domain\Note\Repository;
+
+namespace App\Domain\Note\Service;
+
 
 use App\Domain\Note\Entity\Note;
 use App\Domain\Note\Exceptions\NoteNotFoundException;
 use App\Domain\NoteCollection\Entity\NoteCollection;
 
-interface NoteRepository
+interface NoteServiceInterface
 {
+
     /**
      * @return NoteCollection
      */
@@ -45,4 +47,5 @@ interface NoteRepository
      * @return int
      */
     public function save(Note $note): int;
+
 }

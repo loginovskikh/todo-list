@@ -15,4 +15,4 @@ RUN usermod -u 1000 www-data
 
 WORKDIR /var/www/todo-list
 
-CMD composer install ; php-fpm
+CMD composer install && php-fpm && vendor/bin/phinx migrate -e development

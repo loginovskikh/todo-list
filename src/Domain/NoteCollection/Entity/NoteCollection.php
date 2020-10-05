@@ -15,7 +15,7 @@ class NoteCollection implements JsonSerializable, Countable, IteratorAggregate
     /**
      * @var Note[]
      */
-    private $notes;
+    private $notes = [];
 
     /**
      * @param Note $note

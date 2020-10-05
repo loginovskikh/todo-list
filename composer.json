@@ -16,11 +16,13 @@
     "require": {
         "php": "^7.2",
         "ext-json": "*",
+        "ext-mbstring": "*",
+        "ext-pdo": "*",
         "monolog/monolog": "^2.1",
         "php-di/php-di": "^6.2",
+        "robmorgan/phinx": "^0.12.4",
         "slim/psr7": "^1.1",
-        "slim/slim": "^4.5",
-        "ext-mbstring": "*"
+        "slim/slim": "^4.5"
     },
     "require-dev": {
         "jangregor/phpstan-prophecy": "^0.8.0",
