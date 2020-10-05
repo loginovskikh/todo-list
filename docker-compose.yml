@@ -1,0 +1,52 @@
+version: '3'
+services:
+    postgres:
+#        image: postgres:11
+        build: Docker/database
+        restart: always
+        ports:
+            - '5432:5432'
+        environment:
+            POSTGRES_DB: todo_list
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: password
+
+ #       volumes:
+ #           - ./Docker/postgres/pgdata:/var/lib/postgresql/data
+        networks:
+            todo-list-network:
+                aliases:
+                    - todo-list-network
+    php:
+        build: Docker/php-fpm
+        restart: always
+        ports:
+            - '9000:9000'
+        volumes:
+            - ./:/var/www/todo-list
+            #- ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
+        working_dir: /var/www/todo-list
+        links:
+            - postgres
+        networks:
+            todo-list-network:
+                aliases:
+                    - todo-list-network
+    nginx:
+        build: Docker/nginx
+        restart: always
+        ports:
+            - '8080:80'
+            - '443:443'
+        links:
+            - php
+        volumes:
+            - ./:/var/www/todo-list
+            - ./nginxlog:/var/log/nginx
+        networks:
+            todo-list-network:
+                aliases:
+                    - todo-list-network
+networks:
+    todo-list-network:
+        driver: bridge
