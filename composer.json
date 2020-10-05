@@ -45,7 +45,11 @@
         }
     },
     "scripts": {
-        "start": "docker-compose up -d",
-        "test": "phpunit"
+        "start": [
+            "docker-compose up -d",
+            "@migrate"
+            ],
+        "test": "phpunit",
+        "migrate": "docker exec todolist_php_1 vendor/bin/phinx migrate -e development"
     }
 }
