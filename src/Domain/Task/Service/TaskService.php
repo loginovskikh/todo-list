@@ -1,12 +1,11 @@
 <?php
 
 
-namespace App\Infrastructure\Persistence\Service\Task;
+namespace App\Domain\Task\Service;
 
 
 use App\Domain\Task\Entity\Task;
 use App\Domain\Task\Repository\TaskRepositoryInterface;
-use App\Domain\Task\Service\TaskServiceInterface;
 use App\Domain\TaskCollection\Entity\TaskCollection;
 
 class TaskService implements TaskServiceInterface
