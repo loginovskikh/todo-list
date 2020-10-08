@@ -18,7 +18,7 @@ class SetStatusAction extends TaskAction
     protected function action(): Response
     {
         $params = (array)$this->request->getParsedBody();
-        $this->taskService->setStatus($this->args['id'], $params['status']);
+        $this->taskService->setStatus($this->resolveArg('id'), $params['status']);
 
         return $this->respondWithData();
     }

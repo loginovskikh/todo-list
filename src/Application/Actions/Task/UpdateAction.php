@@ -11,14 +11,13 @@ use Slim\Exception\HttpBadRequestException;
 
 class UpdateAction extends TaskAction
 {
-
     /**
      * @inheritDoc
      */
     protected function action(): Response
     {
         $taskArray = (array)$this->request->getParsedBody();
-        $taskArray['id'] = $this->args['id'];
+        $taskArray['id'] = $this->resolveArg('id');
         $task = Task::create($taskArray);
         $this->taskService->update($task);
 

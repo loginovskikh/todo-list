@@ -16,7 +16,7 @@ class GetByIdAction extends TaskAction
      */
     protected function action(): Response
     {
-        $id = $this->args['id'];
+        $id = $this->resolveArg('id');
         $notes = $this->taskService->findById($id);
 
         return $this->respondWithData($notes->jsonSerialize());
