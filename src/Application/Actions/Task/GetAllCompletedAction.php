@@ -1,14 +1,14 @@
 <?php
 
 
-namespace App\Application\Actions\Note;
+namespace App\Application\Actions\Task;
 
 
 use App\Domain\DomainException\DomainRecordNotFoundException;
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Exception\HttpBadRequestException;
 
-class GetAllCompletedAction extends NoteAction
+class GetAllCompletedAction extends TaskAction
 {
 
     /**
@@ -16,8 +16,8 @@ class GetAllCompletedAction extends NoteAction
      */
     protected function action(): Response
     {
-        $notes = $this->noteService->getAllCompleted();
+        $tasks = $this->taskService->getAllCompleted();
 
-        return $this->respondWithData($notes->jsonSerialize());
+        return $this->respondWithData($tasks->jsonSerialize());
     }
 }

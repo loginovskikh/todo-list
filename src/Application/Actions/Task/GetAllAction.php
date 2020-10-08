@@ -1,23 +1,22 @@
 <?php
 
 
-namespace App\Application\Actions\Note;
+namespace App\Application\Actions\Task;
 
 
 use App\Domain\DomainException\DomainRecordNotFoundException;
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Exception\HttpBadRequestException;
 
-class GetAllNotesAction extends NoteAction
+class GetAllAction extends TaskAction
 {
-
     /**
      * @inheritDoc
      */
     protected function action(): Response
     {
-        $notes = $this->noteService->getAll();
+        $tasks = $this->taskService->getAll();
 
-        return $this->respondWithData($notes->jsonSerialize());
+        return $this->respondWithData($tasks->jsonSerialize());
     }
 }

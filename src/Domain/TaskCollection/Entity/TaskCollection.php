@@ -1,26 +1,26 @@
 <?php
 
 
-namespace App\Domain\NoteCollection\Entity;
+namespace App\Domain\TaskCollection\Entity;
 
 
-use App\Domain\Note\Entity\Note;
+use App\Domain\Task\Entity\Task;
 use ArrayIterator;
 use Countable;
 use IteratorAggregate;
 use JsonSerializable;
 
-class NoteCollection implements JsonSerializable, Countable, IteratorAggregate
+class TaskCollection implements JsonSerializable, Countable, IteratorAggregate
 {
     /**
-     * @var Note[]
+     * @var Task[]
      */
     private $notes = [];
 
     /**
-     * @param Note $note
+     * @param Task $note
      */
-    public function addNote(Note $note): void
+    public function addTask(Task $note): void
     {
         $this->notes[] = $note;
     }

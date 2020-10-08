@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-use App\Application\Actions\Note\GetAllCompletedAction;
-use App\Application\Actions\Note\GetAllNotesAction;
-use App\Application\Actions\Note\GetNoteByIdAction;
-use App\Application\Actions\Note\SaveNoteAction;
-use App\Application\Actions\Note\SetStatusNoteAction;
-use App\Application\Actions\Note\UpdateNoteAction;
+use App\Application\Actions\Task\GetAllCompletedAction;
+use App\Application\Actions\Task\GetAllAction;
+use App\Application\Actions\Task\GetByIdAction;
+use App\Application\Actions\Task\SaveAction;
+use App\Application\Actions\Task\SetStatusAction;
+use App\Application\Actions\Task\UpdateAction;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\App;
@@ -19,11 +19,11 @@ return function (App $app) {
     });
 
     $app->group('/notes', function (Group $group) {
-        $group->get('', GetAllNotesAction::class);
-        $group->get('/{id:[0-9]+}', GetNoteByIdAction::class);
+        $group->get('', GetAllAction::class);
+        $group->get('/{id:[0-9]+}', GetByIdAction::class);
         $group->get('/completed', GetAllCompletedAction::class);
-        $group->post('', SaveNoteAction::class);
-        $group->post('/{id:[0-9]+}', SetStatusNoteAction::class);
-        $group->put('/{id:[0-9]+}', UpdateNoteAction::class);
+        $group->post('', SaveAction::class);
+        $group->post('/{id:[0-9]+}', SetStatusAction::class);
+        $group->put('/{id:[0-9]+}', UpdateAction::class);
     });
 };

@@ -1,15 +1,15 @@
 <?php
 
 
-namespace App\Application\Actions\Note;
+namespace App\Application\Actions\Task;
 
 
 use App\Domain\DomainException\DomainRecordNotFoundException;
-use App\Domain\Note\Entity\Note;
+use App\Domain\Task\Entity\Task;
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Exception\HttpBadRequestException;
 
-class SetStatusNoteAction extends NoteAction
+class UpdateAction extends TaskAction
 {
 
     /**
@@ -17,8 +17,10 @@ class SetStatusNoteAction extends NoteAction
      */
     protected function action(): Response
     {
-        $params = (array)$this->request->getParsedBody();
-        $this->noteService->setStatus($this->args['id'], $params['status']);
+        $taskArray = (array)$this->request->getParsedBody();
+        $taskArray['id'] = $this->args['id'];
+        $task = Task::create($taskArray);
+        $this->taskService->update($task);
 
         return $this->respondWithData();
     }

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Domain\Note\Entity;
+namespace App\Domain\Task\Entity;
 
-use App\Domain\Note\Exceptions\NoteInvalidContentException;
-use App\Domain\Note\Exceptions\NoteInvalidStatusException;
-use App\Domain\Note\Exceptions\NoteInvalidTitleException;
+use App\Domain\Task\Exceptions\TaskInvalidContentException;
+use App\Domain\Task\Exceptions\TaskInvalidStatusException;
+use App\Domain\Task\Exceptions\TaskInvalidTitleException;
 use JsonSerializable;
 
-class Note implements JsonSerializable
+class Task implements JsonSerializable
 {
     /**
      * @var int|null
@@ -81,38 +81,38 @@ class Note implements JsonSerializable
 
     /**
      * @param string $status
-     * @throws NoteInvalidStatusException
+     * @throws TaskInvalidStatusException
      */
     public function setStatus(string $status): void
     {
         if(!in_array($status, self::STATUSES)){
-            throw new NoteInvalidStatusException();
+            throw new TaskInvalidStatusException();
         }
         $this->status = $status;
     }
 
     /**
      * @param string $title
-     * @throws NoteInvalidTitleException
+     * @throws TaskInvalidTitleException
      */
     public function setTitle(string $title): void
     {
         $titleLength = mb_strlen($title);
         if($titleLength < self::TITLE_MINIMAL_LENGTH || $titleLength > self::TITLE_MAX_LENGTH) {
-            throw new NoteInvalidTitleException();
+            throw new TaskInvalidTitleException();
         }
         $this->title = $title;
     }
 
     /**
      * @param string $content
-     * @throws NoteInvalidContentException
+     * @throws TaskInvalidContentException
      */
     public function setContent(string $content): void
     {
         $contentLength = mb_strlen($content);
         if($contentLength < self::CONTENT_MINIMAL_LENGTH || $contentLength > self::CONTENT_MAX_LENGTH) {
-            throw new NoteInvalidContentException();
+            throw new TaskInvalidContentException();
         }
         $this->content = $content;
     }
@@ -127,10 +127,10 @@ class Note implements JsonSerializable
         ];
     }
 
-    public static function create(array $data): Note
+    public static function create(array $data): Task
     {
         $data = self::validateCreateArray($data);
-        return new Note($data['id'], $data['title'], $data['content'], $data['status']);
+        return new Task($data['id'], $data['title'], $data['content'], $data['status']);
     }
 
     private static function validateCreateArray(array $data)

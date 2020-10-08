@@ -1,14 +1,14 @@
 <?php
 
 
-namespace App\Application\Actions\Note;
+namespace App\Application\Actions\Task;
 
 
 use App\Domain\DomainException\DomainRecordNotFoundException;
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Exception\HttpBadRequestException;
 
-class GetNoteByIdAction extends NoteAction
+class GetByIdAction extends TaskAction
 {
 
     /**
@@ -17,7 +17,7 @@ class GetNoteByIdAction extends NoteAction
     protected function action(): Response
     {
         $id = $this->args['id'];
-        $notes = $this->noteService->findNoteById($id);
+        $notes = $this->taskService->findById($id);
 
         return $this->respondWithData($notes->jsonSerialize());
     }

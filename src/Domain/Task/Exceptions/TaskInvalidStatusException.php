@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Domain\Note\Exceptions;
+namespace App\Domain\Task\Exceptions;
 
 use App\Domain\DomainException\DomainException;
 use Fig\Http\Message\StatusCodeInterface;
 
-class NoteInvalidContentException extends DomainException
+class TaskInvalidStatusException extends DomainException
 {
-    public $message = 'Note validation failed. Content must be less than 1000 characters';
+    public $message = 'Task validation failed. Unavailable status';
     public $code = StatusCodeInterface::STATUS_BAD_REQUEST;
 }
