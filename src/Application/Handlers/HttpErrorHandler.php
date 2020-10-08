@@ -5,7 +5,11 @@ namespace App\Application\Handlers;
 
 use App\Application\Actions\ActionError;
 use App\Application\Actions\ActionPayload;
-use App\Domain\DomainException\DomainException;
+use App\Domain\Task\Exceptions\TaskInvalidContentException;
+use App\Domain\Task\Exceptions\TaskInvalidStatusException;
+use App\Domain\Task\Exceptions\TaskInvalidTitleException;
+use App\Domain\Task\Exceptions\TaskNotFoundException;
+use Fig\Http\Message\StatusCodeInterface;
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Exception\HttpBadRequestException;
 use Slim\Exception\HttpException;
@@ -51,8 +55,20 @@ class HttpErrorHandler extends SlimErrorHandler
 
         }
 
-        if ($exception instanceof DomainException) {
-            $statusCode = $this->exception->getCode();
+        if ($exception instanceof TaskInvalidContentException) {
+            $statusCode = StatusCodeInterface::STATUS_BAD_REQUEST;
+            $error->setType('DOMAIN_EXCEPTION');
+        }
+        if ($exception instanceof TaskInvalidStatusException) {
+            $statusCode = StatusCodeInterface::STATUS_BAD_REQUEST;
+            $error->setType('DOMAIN_EXCEPTION');
+        }
+        if ($exception instanceof TaskInvalidTitleException) {
+            $statusCode = StatusCodeInterface::STATUS_BAD_REQUEST;
+            $error->setType('DOMAIN_EXCEPTION');
+        }
+        if ($exception instanceof TaskNotFoundException) {
+            $statusCode = StatusCodeInterface::STATUS_NOT_FOUND;
             $error->setType('DOMAIN_EXCEPTION');
         }
 
