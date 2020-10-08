@@ -26,15 +26,6 @@ interface TaskRepositoryInterface
      */
     public function getAllCompleted(): TaskCollection;
 
-
-    /**
-     * @param int $id
-     * @param string $newStatus
-     * @return void
-     */
-    public function setStatus(int $id, string $newStatus): void;
-
-
     /**
      * @param Task $note
      */

@@ -78,19 +78,6 @@ class TaskPostgresRepository implements TaskRepositoryInterface
     /**
      * @inheritDoc
      */
-    public function setStatus(int $id, string $newStatus): void
-    {
-        $sql = 'UPDATE tasks SET status = :status WHERE id = :id';
-        $query = $this->pdo->prepare($sql);
-        $query->execute([
-            'status' => $newStatus,
-            'id' => $id
-        ]);
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function update(Task $task): void
     {
         $sql = 'UPDATE tasks SET title = :title, content = :content, status = :status WHERE id = :id';

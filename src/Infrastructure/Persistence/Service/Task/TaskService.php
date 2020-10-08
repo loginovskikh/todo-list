@@ -50,7 +50,9 @@ class TaskService implements TaskServiceInterface
      */
     public function setStatus(int $id, string $newStatus): void
     {
-        $this->taskRepository->setStatus($id, $newStatus);
+        $task = $this->taskRepository->findById($id);
+        $task->setStatus($newStatus);
+        $this->taskRepository->update($task);
     }
 
     /**
