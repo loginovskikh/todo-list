@@ -5,6 +5,7 @@ namespace App\Domain\Task\Service;
 
 
 use App\Domain\Task\Entity\Task;
+use App\Domain\Task\Entity\TaskDTO;
 use App\Domain\Task\Repository\TaskRepositoryInterface;
 use App\Domain\TaskCollection\Entity\TaskCollection;
 
@@ -57,16 +58,18 @@ class TaskService implements TaskServiceInterface
     /**
      * @inheritDoc
      */
-    public function update(Task $note): void
+    public function update(TaskDTO $taskDto): void
     {
-        $this->taskRepository->update($note);
+        $task = Task::createFromDTO($taskDto);
+        $this->taskRepository->update($task);
     }
 
     /**
      * @inheritDoc
      */
-    public function save(Task $note): int
+    public function save(TaskDTO $taskDto): int
     {
-        return $this->taskRepository->save($note);
+        $task = Task::createFromDTO($taskDto);
+        return $this->taskRepository->save($task);
     }
 }

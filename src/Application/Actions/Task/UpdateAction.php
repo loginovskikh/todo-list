@@ -3,8 +3,7 @@
 
 namespace App\Application\Actions\Task;
 
-
-use App\Domain\Task\Entity\Task;
+use App\Domain\Task\Entity\TaskDTO;
 use Psr\Http\Message\ResponseInterface as Response;
 
 class UpdateAction extends TaskAction
@@ -16,7 +15,7 @@ class UpdateAction extends TaskAction
     {
         $taskArray = (array)$this->request->getParsedBody();
         $taskArray['id'] = $this->resolveArg('id');
-        $task = Task::create($taskArray);
+        $task = TaskDTO::create($taskArray);
         $this->taskService->update($task);
 
         return $this->respondWithData();

@@ -3,8 +3,7 @@
 
 namespace App\Application\Actions\Task;
 
-
-use App\Domain\Task\Entity\Task;
+use App\Domain\Task\Entity\TaskDTO;
 use Psr\Http\Message\ResponseInterface as Response;
 
 class SaveAction extends TaskAction
@@ -15,7 +14,7 @@ class SaveAction extends TaskAction
     protected function action(): Response
     {
         $taskArray = (array)$this->request->getParsedBody();
-        $task = Task::create($taskArray);
+        $task = TaskDTO::create($taskArray);
         $taskId = $this->taskService->save($task);
 
         return $this->respondWithData(['id' => $taskId]);

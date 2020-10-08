@@ -5,6 +5,7 @@ namespace App\Domain\Task\Service;
 
 
 use App\Domain\Task\Entity\Task;
+use App\Domain\Task\Entity\TaskDTO;
 use App\Domain\Task\Exceptions\TaskNotFoundException;
 use App\Domain\TaskCollection\Entity\TaskCollection;
 
@@ -36,16 +37,15 @@ interface TaskServiceInterface
      */
     public function setStatus(int $id, string $newStatus): void;
 
-
     /**
-     * @param Task $note
+     * @param TaskDTO $task
      */
-    public function update(Task $note): void;
+    public function update(TaskDTO $task): void;
 
     /**
-     * @param Task $note
+     * @param TaskDTO $task
      * @return int
      */
-    public function save(Task $note): int;
+    public function save(TaskDTO $task): int;
 
 }

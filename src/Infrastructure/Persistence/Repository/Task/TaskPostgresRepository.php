@@ -33,7 +33,7 @@ class TaskPostgresRepository implements TaskRepositoryInterface
         $query->execute(['status' => 'active']);
         if($query){
             while($row = $query->fetch(PDO::FETCH_ASSOC)) {
-                $task = Task::create($row);
+                $task = Task::createFromArray($row);
                 $taskCollection->addTask($task);
             }
         }
@@ -56,7 +56,7 @@ class TaskPostgresRepository implements TaskRepositoryInterface
         if(!$row) {
             throw new TaskNotFoundException();
         }
-        return Task::create($row[0]);
+        return Task::createFromArray($row[0]);
     }
 
     /**
@@ -68,7 +68,7 @@ class TaskPostgresRepository implements TaskRepositoryInterface
         $sql = "SELECT * FROM tasks WHERE status = 'completed'";
         $query = $this->pdo->query($sql);
         while($row = $query->fetch()) {
-            $task = Task::create($row);
+            $task = Task::createFromArray($row);
             $taskCollection->addTask($task);
         }
 

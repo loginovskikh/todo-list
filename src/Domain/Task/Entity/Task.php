@@ -127,7 +127,7 @@ class Task implements JsonSerializable
         ];
     }
 
-    public static function create(array $data): Task
+    public static function createFromArray(array $data): Task
     {
         $data = self::validateCreateArray($data);
         return new Task($data['id'], $data['title'], $data['content'], $data['status']);
@@ -141,5 +141,10 @@ class Task implements JsonSerializable
         $validData['status'] = $data['status'] ?? '';
 
         return $validData;
+    }
+
+    public static function createFromDTO(TaskDTO $dto)
+    {
+        return new Task($dto->getId(), $dto->getTitle(), $dto->getContent(), $dto->getStatus());
     }
 }
